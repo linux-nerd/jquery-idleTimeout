@@ -86,6 +86,32 @@
       store.set('idleTimerLoggedOut', true);
     };
 
+    /**
+     * @name setIdleTimeLimit
+     * @param {number} time [idleTimeLimit in seconds]
+     * @description change the idleTimeLimit at runtime after the instantiation of plugin
+     * @example
+     *
+     * var idle = $(document).idleTimeout(configObj);
+     * idle.setIdleTimeLimit(15);
+     */
+    this.setIdleTimeLimit = function ( time ) {
+      // time in seconds
+      if( typeof time === 'number' ) {
+
+        console.log("current value of idleTimeLimit " + currentConfig.idleTimeLimit)
+        console.log("updating the idleTimeLimit to " + time);
+        // update the idleTimeLimit
+        currentConfig.idleTimeLimit = time;
+        console.log("Updated idleTimeLimit is " + currentConfig.idleTimeLimit);
+
+        console.log("calling startIdleTimer method, which will stop the timer and start it again with updated idleTimeLimit");
+        // call startIdleTimer, this will implecitly call stopIdleTimer method
+        startIdleTimer();
+      }
+    };
+
+
     // trigger a recheck for iframes
     // use this code snippet after an iframe is inserted into the document: $.fn.idleTimeout().iframeRecheck()
     this.iframeRecheck = function () {

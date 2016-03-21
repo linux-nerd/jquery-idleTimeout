@@ -80,6 +80,27 @@
       store.set('idleTimerLoggedOut', true);
     };
 
+    /**
+     * @name setIdleTimeLimit
+     * @param {number} time [idleTimeLimit in seconds]
+     * @description change the idleTimeLimit at runtime after the instantiation of plugin
+     * @example
+     *
+     * var idle = $(document).idleTimeout(configObj);
+     * idle.setIdleTimeLimit(15);
+     */
+    this.setIdleTimeLimit = function ( time ) {
+      // time in seconds
+      if( typeof time === 'number' ) {
+
+        // update the idleTimeLimit
+        currentConfig.idleTimeLimit = time;
+
+        // call startIdleTimer, this will implecitly call stopIdleTimer method
+        startIdleTimer();
+      }
+    };
+
     //##############################
     //## Private Functions
     //##############################
